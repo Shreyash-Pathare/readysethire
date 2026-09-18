@@ -61,7 +61,8 @@ const Agent = ({
       setIsSpeaking(false);
     };
 
-    const onError = (error: Error) => {
+    
+    const onError = (error: unknown) => {
       console.log("Error:", error);
     };
 
@@ -118,7 +119,8 @@ const Agent = ({
     setCallStatus(CallStatus.CONNECTING);
 
     if (type === "generate") {
-      await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
+      
+      await vapi.start(process.env.NEXT_PUBLIC_VAPI_GENERATE_ASSISTANT_ID!, {
         variableValues: {
           username: userName,
           userid: userId,
@@ -132,6 +134,7 @@ const Agent = ({
           .join("\n");
       }
 
+      
       await vapi.start(interviewer, {
         variableValues: {
           questions: formattedQuestions,
@@ -167,10 +170,10 @@ const Agent = ({
         <div className="card-border">
           <div className="card-content">
             <div className="rounded-full bg-primary-200 size-[120px] flex items-center justify-center">
-  <span className="text-4xl font-bold text-white">
-    {userName?.charAt(0).toUpperCase()}
-  </span>
-</div>
+              <span className="text-4xl font-bold text-white">
+                {userName?.charAt(0).toUpperCase()}
+              </span>
+            </div>
             <h3>{userName}</h3>
           </div>
         </div>
